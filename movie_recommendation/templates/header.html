@@ -1,0 +1,22 @@
+{% load static %}
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-intro padding-y-sm">
+<div class="container">
+	        <div class="intro-banner-wrap">
+                {% if category %}
+                <img class="my_image" src="{{category.image.url}}" alt="{{category.name}}" class="img-fluid rounded" width="1190px;"height="500px">
+
+            </div>
+            <br>
+            <div>
+                <h1 class="text-center my_title">{{category.name}}</h1>
+
+            </div>
+{% else %}
+<div class="intro-banner-wrap">
+	<img src="{% static 'images/banners/4.png' %}" class="img-fluid rounded" width="1190px;"height="500px">
+</div>
+{% endif %}
+</div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->

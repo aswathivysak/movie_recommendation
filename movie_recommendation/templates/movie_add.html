@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block body %}
+<!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+        <h1 class="h3 mb-0 text-gray-800">Add movie</h1>
+        </div>
+
+        <!-- Main Content Here -->
+        <div class="card  o-hidden border-0 shadow-lg my-5 px-2 mx-4">
+
+          <div class="card-body p-0">
+            <div class="row">
+              <div class="col-lg-3"></div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Add Movie Here</h1>
+                  </div>
+<form method="post" enctype="multipart/form-data">
+   {% csrf_token %}
+            <div class="form-group">
+                 <label for="title" class="form-label">Movie title</label>
+                <input class="form-control" id="title" type="text" name="title" required>
+
+            </div>
+            <div class="form-group">
+                  <label for="description" class="form-label">Movie Description</label>
+                <input class="form-control" id="description" type="text" name="description" required>
+            </div>
+            <div class="form-group">
+                  <label for="actors" class="form-label">Staring by</label>
+                <input class="form-control" id="actors" type="text" name="actors" required>
+            </div>
+            <div class="form-group">
+                  <label for="link" class="form-label">Trailer link</label>
+                <input class="form-control" id="link" type="text" name="link" required>
+            </div>
+            <div class="form-group">
+                 <label for="releaseDate" class="form-label">Movie Release date</label>
+                 <input class="form-control" type="date" id="releaseDate" name="date" required>
+
+            </div>
+            <div class="form-row">
+                <div class="col form-group">
+                <label for="category" class="form-label">Movie Category</label><br>
+
+               <select class="form-select form-select-lg mb-2 py-2 px-2 " name="category" id="category" aria-label=".form-select-lg example" REQUIRED>
+                      <option selected>Open this select menu</option>
+                   {% for cat in category %}
+                      <option value="{{cat.id}}">{{cat.name}}</option>
+                   {%  endfor %}
+
+               </select>
+
+                    </div>
+                <div class="col form-group">
+                     <label for="poster" class="form-label">Movie Poster</label><br>
+                 <input type="file" id="poster" name="img" required><br><br>
+                </div>
+                </div>
+
+            <input class="btn btn-primary shadow btn-block" type="submit">
+
+</form>
+                    <hr>
+                  <div class="text-center">
+                    <a class="small" href="{% url 'movieapp:index' %}">Back</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+    </div>
+    <!-- /.container-fluid -->
+
+{% endblock%}

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Search - ABC Movie
+{% endblock %}
+
+{% block body %}
+
+<section class="section-content padding-y ">
+<div class="container ">
+
+<!-- ============================ COMPONENT 1 ================================= -->
+
+<div class="row">
+	<div class="col-sm-2"></div>
+	<aside class="col-lg-7">
+<div class="card">
+	<!--for message				-->
+				 {% if messages %}
+
+          {% for message in messages %}
+			  <div id="mes" class="container">
+              <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %} role="alert">
+				  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+              {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+              {{ message }}
+              </div>
+			  </div>
+		  {% endfor %}
+
+		  {% endif %}
+<!--end here				-->
+
+<table class="table table-borderless table-shopping-cart">
+
+<thead class="text-muted">
+<tr class="small text-uppercase">
+  <th scope="col">Movie</th>
+<!--  <th scope="col" width="120">Quantity</th>-->
+<!--  <th scope="col" width="120">Price</th>-->
+<!--  <th scope="col" class="text-right" width="200"> </th>-->
+</tr>
+</thead>
+	{% for wishmovie in wish_movies %}
+<tbody>
+<tr>
+	<td>
+		<figure class="itemside align-items-center">
+			<a href="{% url 'movieapp:movieDetail' wishmovie.movie.id %}"><div class="aside"><img src="{{wishmovie.movie.Poster.url}}" class="img-sm"></div></a>
+			<figcaption class="info">
+				<a href="#" class="title text-dark">Title :{{wishmovie.movie.Title}}</a>
+				<p class="text-muted small">Release Date :{{wishmovie.movie.Release_date}}<br>Movie Category : {{wishmovie.movie.category}}</p>
+			</figcaption>
+		</figure>
+	</td>
+
+	<td class="text-right">
+	<a href="{% url 'whishlist:delete_whish_movie' wishmovie.id  %}" class="btn btn-danger"> Remove</a>
+	</td>
+
+</tr>
+</tbody>
+	{% endfor %}
+</table>
+</div> <!-- card.// -->
+
+
+	</aside>
+
+
+</div> <!-- row.// -->
+
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+<br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

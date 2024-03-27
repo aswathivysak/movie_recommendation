@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Search - ABC Movie
+{% endblock %}
+
+{% block body %}
+{% include 'header.html' %}
+
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+    <header class="border-bottom mb-4 pb-3">
+		<div class="form-inline">
+
+		</div>
+         <div>
+    <p class="text-center my_search_txt">You have searched for :<b>"{{keyword}}"</b><span class="mr-md-auto">, {{movie_count}} Items found </span>
+</p>
+
+    </div>
+</header><!-- sect-heading -->
+
+
+    <div class="container">
+        <div class="row">
+    {% if movies %}
+	{% for movie in movies %}
+	<div class="col-md-3">
+		<div class="card card-product-grid">
+			<a href="{{movie.get_url}}" class="img-wrap"> <img src="{{movie.Poster.url}}"> </a>
+<!--			<a href="movie/movie.id/" class="img-wrap"> <img src="{{movie.Poster.url}}"> </a>-->
+			<figcaption class="info-wrap">
+				<a href="" class="title text-center"><h4>{{movie.Title}}</h4></a>
+				<div class="price text-center mt-1">{{movie.Release_date}}</div><!-- price-wrap.// -->
+				<div class="price text-center mt-1">{{movie.Actors}}</div>
+			</figcaption>
+		</div>
+	</div> <!-- col.// -->
+	{% endfor %}
+            {% else %}
+            <div>
+                <h2>
+                    No result found. please
+                </h2>
+            </div>
+            {% endif %}
+            <br><br><br><br><br>
+</div> <!-- row.// -->
+
+<!--paginator	-->
+<div class="container">
+   <div class="row">
+    <di class="col-md-4"></di>
+    <div class="col-md-8 text-md-center">
+        <nav class="mt-4" aria-label="Page navigation sample">
+         {% if movies.has_other_pages %}
+          <ul class="pagination">
+              {% if movies.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{movies.previous_page_number}}">Previous</a></li>
+              {% else %}
+              <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+              {% endif %}
+
+              {% for i in movies.paginator.page_range %}
+                {% if products.number == i %}
+                  <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                 {% else %}
+                  <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                 {% endif %}
+              {% endfor%}
+
+              {% if movies.has_next %}
+                 <li class="page-item"><a class="page-link" href="?page={{movies.next_page_number}}">Next</a></li>
+              {% else %}
+                 <li class="page-item disabled "><a class="page-link" href="#">Next</a></li>
+              {% endif %}
+          </ul>
+         {% endif %}
+        </nav>
+        </div>
+    </div>
+ </div>
+</div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+{% endblock %}
